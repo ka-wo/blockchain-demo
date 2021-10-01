@@ -1,3 +1,5 @@
+const sha256 = require('sha256');
+
 function Blockchain() {
     this.chain = []; // all of the blocks that we create and mine will be store here
     this.pendingTransactions = []; // all of the new transactions that will be created before they are placed into a block
@@ -33,6 +35,14 @@ Blockchain.prototype.createNewTransaction = function(amount, sender, recipient) 
     this.pendingTransactions.push(newTransaction);
 
     return this.getLastBlock()['index'] + 1; // we want to return an index of a block that will hold this transaction - it will be the one created after creating this transaction (that's why we have +1)
+}
+
+Blockchain.prototype.module.hashBlock = function(previousBlockHash, currentBlockData, nonce) {
+    // return fix-length hash based on passed data - using sha256
+
+    const dataAsString = previousBlockHash + nonce.toString() + JSON.stringify(currentBlockData);
+
+    return sha256(dataAsString);
 }
 
 module.exports = Blockchain;
