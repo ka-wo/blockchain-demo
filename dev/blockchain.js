@@ -37,7 +37,7 @@ Blockchain.prototype.createNewTransaction = function(amount, sender, recipient) 
     return this.getLastBlock()['index'] + 1; // we want to return an index of a block that will hold this transaction - it will be the one created after creating this transaction (that's why we have +1)
 }
 
-Blockchain.prototype.module.hashBlock = function(previousBlockHash, currentBlockData, nonce) {
+Blockchain.prototype.hashBlock = function(previousBlockHash, currentBlockData, nonce) {
     // return fix-length hash based on passed data - using sha256
 
     const dataAsString = previousBlockHash + nonce.toString() + JSON.stringify(currentBlockData);
