@@ -11,7 +11,7 @@ const bitcoin = new Blockchain();
 
 // bitcoin.createNewTransaction(5400, "Straw", "Bren");
 
-const previousBlockHash = 'OIJSOADA83JAOJ3O83J';
+const previousBlockHash = '0000OADA83JAOJ3O83J';
 const currentBlockData = [
     { amount: 10, sender: 'ASDAHI3UH23234HFD', recipient: "OIHTJOITRH59595" },
     { amount: 46, sender: 'IUHIUHVS8989834', recipient: "OJKPOKPOKWWQ423" },
@@ -20,6 +20,7 @@ const currentBlockData = [
 const nonce = 20;
 
 console.log(bitcoin.hashBlock(previousBlockHash, currentBlockData, nonce));
-// console.log(bitcoin.chain[1]);
+const newNonce = bitcoin.proofOfWork(previousBlockHash, currentBlockData);
+console.log(bitcoin.hashBlock(previousBlockHash, currentBlockData, newNonce));
 
 
