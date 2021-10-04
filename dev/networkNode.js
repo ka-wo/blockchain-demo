@@ -3,6 +3,7 @@ const Blockchain = require('./blockchain');
 var app = express();
 const bodyParser = require('body-parser');
 const uuid = require('uuid/v1');
+const port = process.argv[2];
 
 const bitcoin = new Blockchain();
 const nodeAddress = uuid().split('-').join(''); //split and join used to remove dashes from generated UUID
@@ -43,6 +44,6 @@ app.get('/mine', function(req, res){
 });
 
 
-app.listen(3000, function() {
-    console.log('Listening on port 3000...');
+app.listen(port, function() {
+    console.log(`Listening on port ${port}...`);
 });
