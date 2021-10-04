@@ -2,8 +2,10 @@ var express = require('express');
 const Blockchain = require('./blockchain');
 var app = express();
 const bodyParser = require('body-parser');
+const uuid = require('uuid/v1');
 
 const bitcoin = new Blockchain();
+const nodeAddress = uuid().split('-').join(''); //split and join used to remove dashes from generated UUID
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,7 +33,7 @@ app.get('/mine', function(req, res){
     const newBlockHash =  bitcoin.hashBlock(previousBlockHash, currentBlockData, nonce);
 
     // Add a reward for mining for the current node
-
+    bitcoin.createNewTransaction(12.5, "00", nodeAddress);
 
     const newBlock = bitcoin.createNewBlock(nonce, previousBlockHash, newBlockHash);
     res.json({
